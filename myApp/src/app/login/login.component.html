@@ -1,0 +1,21 @@
+<ion-content>
+  
+  <div>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+      <ion-item>
+        <ion-label>Pseudo : </ion-label>
+        <ion-input
+          type="text"
+          formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mot de passe : </ion-label>
+        <ion-input
+          type="text"
+          formControlName="pass"></ion-input>
+      </ion-item>
+      <ion-button [disabled]="!loginForm.valid" type="submit">Se connecter</ion-button>
+    </form>
+  </div>
+
+</ion-content>

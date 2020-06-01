@@ -1,0 +1,65 @@
+<ion-content>
+
+  <div *ngFor="let i of errorMsg">
+    <div *ngIf="error">{{ i.message }}</div>
+  </div>
+
+  <div *ngIf="success">
+    <div>Votre compte à été crée veuillez vous conecter <a href="login">ici</a></div>
+  </div>
+  
+  <div *ngIf="form">
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+      <ion-item>
+        <ion-label>Nom : </ion-label>
+        <ion-input
+          type="text"
+          formControlName="lname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Prenom : </ion-label>
+        <ion-input
+          type="text"
+          formControlName="fname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email : </ion-label>
+        <ion-input
+          type="mail"
+          formControlName="mail"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Confirmation de mail : </ion-label>
+        <ion-input
+          type="mail"
+          formControlName="cmail"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pseudo : </ion-label>
+        <ion-input
+          type="text"
+          formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mot de passe : </ion-label>
+        <ion-input
+          type="password"
+          formControlName="pass"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Confirmation de mot de passe : </ion-label>
+        <ion-input
+          type="password"
+          formControlName="cpass"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>phone : </ion-label>
+        <ion-input
+          type="number"
+          formControlName="phone"></ion-input>
+      </ion-item>
+      <ion-button [disabled]="!registerForm.valid" type="submit">S'enregistrer</ion-button>
+    </form>
+  </div>
+
+</ion-content>

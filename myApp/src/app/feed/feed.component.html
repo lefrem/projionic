@@ -1,0 +1,47 @@
+<ion-content>
+
+    <form [formGroup]="questForm" (ngSubmit)="submitQuest()">
+      <ion-item>
+        <ion-label>Title : </ion-label>
+        <ion-input
+          type="text"
+          formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Content : </ion-label>
+        <ion-input
+          type="text"
+          formControlName="content"></ion-input>
+      </ion-item>
+      <ion-button [disabled]="!questForm.valid" type="submit">add quest</ion-button>
+    </form>
+    
+</ion-content>
+<ion-content>
+
+  <div *ngFor="let quest of result">
+    <ion-card>
+      <ion-card-header>
+        <!-- <img src="{{ quest.img }}"> -->
+        <ion-title>
+          {{ quest.title }}
+        </ion-title>
+        <ion-label>
+          {{ quest.date }}
+        </ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>
+          {{ quest.content }}
+        </ion-label>
+        <ion-label>
+          by {{ quest.username }}
+        </ion-label>
+      </ion-card-content>
+      <ion-button (click)="addQuest(quest.id)">
+        ADD
+      </ion-button>
+    </ion-card>
+  </div>
+
+</ion-content>

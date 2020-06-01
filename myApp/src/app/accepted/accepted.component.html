@@ -1,0 +1,51 @@
+<ion-content>
+
+  <ion-title>My quest accept</ion-title>
+
+  <div *ngFor="let quest of questAccept">
+    <ion-card>
+      <ion-card-header>
+        <!-- <img src="{{ quest.img }}"> -->
+        <ion-title>
+          {{ quest.title }}
+        </ion-title>
+        <ion-label>
+          {{ quest.date }}
+        </ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>
+          {{ quest.content }}
+        </ion-label>
+        <ion-label>
+          by {{ quest.username }}
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+<ion-content>
+
+  <ion-title>My quest creat</ion-title>
+
+  <div *ngFor="let quest of myQuest">
+    <ion-card>
+      <ion-card-header>
+        <!-- <img src="{{ quest.img }}"> -->
+        <ion-title>
+          {{ quest.title }}
+        </ion-title>
+        <ion-label>
+          {{ quest.date }}
+        </ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>
+          {{ quest.content }}
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
