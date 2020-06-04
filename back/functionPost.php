@@ -295,22 +295,25 @@
                             $request->execute();
                             $result = $request->fetchall();
 
+                            $array = array();
+
                             for ($i=0; $i < COUNT($result); $i++) { 
                                 try {
                                     $request= $pdo->prepare("SELECT `quest`.`id`, `quest`.`title`, `quest`.`content`, `quest`.`date`, `user`.`username` FROM `quest` INNER JOIN `user` ON `quest`.`userAdd` = `user`.`id` WHERE `quest`.`id` = :id");
                                     $request->bindParam(':id', $result[$i]["idQuest"]);
                                     $request->execute();
-                                    $results = $request->fetchall();
+                                    $results = $request->fetch(PDO::FETCH_ASSOC);
 
-                                    $array[$i] = $results; 
+                                    array_push($array,$results);
 
-                                    $return["sql"] = "tamere";
-                                    $return["message"] = $array;
                                 } catch (Exception $e) {
                                     $return["success"] = false;
                                     $return["message"] = "fail to sherch quest asign";
                                 }
                             }
+
+                            $return["success"] = false;
+                            $return["message"] = $array;
                             
                         } catch (Exception $e) {
                             $return["success"] = false;
