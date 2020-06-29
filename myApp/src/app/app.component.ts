@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent implements OnInit {
   showFirstMenue : boolean = true;
   showSndMenue : boolean = false;
+  data: Object = {
+    tokenUser: null,
+    action: null
+  }
+  result: any;
 
   public selectedIndex = 0;
   public appPages = [
@@ -51,7 +57,8 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router:Router
   ) {
     this.initializeApp();
   }
@@ -71,6 +78,19 @@ export class AppComponent implements OnInit {
       this.showFirstMenue = false;
       this.showSndMenue = true;
     }
+  }
+
+  checkToken() {
+    this.data["tokenUser"] = localStorage.getItem('token');
+    this.data["action"] = "checkToken";
+
+    console.log(this.data["tokenUser"]);
+    
+
+    // this.PostService.checkToken(this.data).subscribe(response => {
+    //   this.result = response;
+    //   return this.result;
+    // })
   }
 
   ngOnInit() {

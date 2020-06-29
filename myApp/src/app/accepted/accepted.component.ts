@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
-import { log } from 'util';
+import { modalController } from '@ionic/core';
 
 @Component({
   selector: 'app-accepted',
@@ -11,9 +11,9 @@ export class AcceptedComponent implements OnInit {
 
   questAccept: any;
   myQuest: any;
+  result: any;
   data: object = {
-    tokenUser : null,
-    action : null,
+    
   }
 
   constructor(
@@ -30,7 +30,6 @@ export class AcceptedComponent implements OnInit {
     this.data["action"] = "myQuest";
     this.PostService.getMyQuest(this.data).subscribe(response => {
       this.myQuest = response["message"];
-      console.log(response);
       return this.myQuest;
     })
   }
@@ -40,9 +39,52 @@ export class AcceptedComponent implements OnInit {
     this.data["action"] = "questAccept";
     this.PostService.getQuestAccepts(this.data).subscribe(response => {
       this.questAccept = response["message"];
-      console.log(response["message"]);
       return this.questAccept;
     })
   }
 
+  finish(id: number) {
+    this.data["tokenUser"] = localStorage.getItem('token');
+    this.data["idQuest"] = id;
+    this.data["action"] = "finishQuest";
+
+    this.PostService.finisQuest(this.data).subscribe(response => {
+      this.result = response;
+      this.questAccepts();
+      return this.result;
+    })
+    
+  }
+
+  remove(id: number) {
+    this.data["tokenUser"] = localStorage.getItem('token');
+    this.data["idQuest"] = id;
+    this.data["action"] = "finishQuest";
+
+    this.PostService.finisQuest(this.data).subscribe(response => {
+      this.result = response;
+      this.questAccepts();
+      return this.result;
+    })
+  }
+
+  response(id: number) {
+    let currentModal = null;
+    createModal()
+
+    async function createModal() {
+      const modal = await modalController.create({
+        component: 'modal-page'
+      });
+
+      await modal.present();
+      currentModal = modal;
+    }
+
+    function dismissModal() {
+      if (currentModal) {
+        currentModal.dismiss().then(() => { currentModal = null; });
+      }
+    }
+  }
 }

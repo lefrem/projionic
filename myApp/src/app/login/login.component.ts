@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     private AppComponent:AppComponent
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

@@ -332,6 +332,78 @@
 
                 break;
 
+            case 'finishQuest':
+
+            if (isset($data->{'tokenUser'}) &&  isset($data->{'idQuest'})) {
+
+                try {
+                    
+                    $request= $pdo->prepare("SELECT `id` FROM `user` WHERE token = :token");
+                    $request->bindParam(':token', $data->{'tokenUser'});
+                    $request->execute();
+                    $result = $request->fetch(PDO::FETCH_ASSOC);
+
+                    
+                    try {
+                        
+                        $request= $pdo->prepare("DELETE FROM `quest_asign` WHERE `idUser` = :idUser AND `idQuest` = :idQuest");
+                        $request->bindParam(':idUser', $result['id']);
+                        $request->bindParam(':idQuest', $data->{'idQuest'});
+                        $request->execute();
+
+                        $return["success"] = true;
+                        $return["message"] = "remove success";
+
+                    } catch (Exception $e) {
+                        
+                        $return["success"] = false;
+                        $return["message"] = "error remove";
+
+                    }
+
+                } catch (Exception $e) {
+                    
+                }
+
+            } else {
+                $return["success"] = false;
+                $return["message"] = "data missing";
+            }
+                
+                break;
+
+            case 'checkToken':
+                
+                if (isset($data->{'tokenUser'})) {
+                    try {
+                        $request= $pdo->prepare("SELECT `dateToken` FROM `user` WHERE token = :token");
+                        $request->bindParam(':token', $data->{'tokenUser'});
+                        $request->execute();
+                        $result = $request->fetch(PDO::FETCH_ASSOC);
+                        
+                        $today = date("Y-m-d");
+                        $result = explode('-',$result["dateToken"]);
+                        $result = $result[0].'-'.$result[1].'-'.$result[2];
+                        
+                        $return["message"] = $result;
+                        $return["message1"] = $today;
+
+                        if ($today > $result) {
+                            $return["msg"] = "diff";
+                        }
+
+                    } catch (Exeption $e) {
+                        $return["success"] = false;
+                        $return["message"] = "error check date of token";
+                    }
+                } else {
+                    $return["success"] = false;
+                    $return["message"] = "data missing";
+                }
+                
+
+                break;
+
             default:
 
                 $return["success"] = false;

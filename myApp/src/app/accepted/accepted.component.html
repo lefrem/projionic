@@ -21,6 +21,7 @@
           by {{ quest.username }}
         </ion-label>
       </ion-card-content>
+      <ion-button (click)="finish(quest.id)" type="submit">Finish</ion-button>
     </ion-card>
   </div>
 
@@ -45,6 +46,8 @@
           {{ quest.content }}
         </ion-label>
       </ion-card-content>
+      <ion-button (click)="response(quest.id)" type="submit">view responce</ion-button>
+      <ion-button (click)="remove(quest.id)" type="submit">remove</ion-button>
     </ion-card>
   </div>
 

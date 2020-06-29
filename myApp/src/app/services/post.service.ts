@@ -44,4 +44,12 @@ export class PostService {
     return this.http.post(this.url,data);
   }
 
+  finisQuest(data){
+    return this.http.post(this.url,data);
+  }
+
+  checkToken(data){
+    return this.http.post(this.url,data);
+  }
+
 }
